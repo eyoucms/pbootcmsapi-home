@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pbootcms授权码生成工具</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://registry.npmmirror.com/page-agent/1.6.2/files/dist/iife/page-agent.demo.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Pbootcms授权码生成工具</h1>
+        <p class="subtitle">生成授权码</p>        
+        <div class="current-info">
+            <p><strong>当前访问信息：</strong></p>
+            <p>访问域名：<strong id="current-domain">加载中...</strong></p>
+        </div>        
+        <form id="sn-form">
+            <div class="form-group">
+                <label for="domain">域名（可选）：</label>
+                <div class="input-with-btn">
+                    <input type="text" id="domain" name="domain" placeholder="例如：example.com">
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">提示：将同时为输入的域名和"www."前缀的域名生成SN码</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="server_ip">服务器IP（可选）：</label>
+                <div class="input-with-btn">
+                    <input type="text" id="server_ip" name="server_ip" placeholder="例如：192.168.1.1">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="user">万能码手机号：</label>
+                <input type="text" id="user" name="user" placeholder="用于生成万能码">
+            </div>
+            
+            <div class="form-group">
+                <label for="existing_sn">已有SN码（可添加多个，用逗号分隔）：</label>
+                <input type="text" id="existing_sn" name="existing_sn" placeholder="已有SN码，会自动合并到结果中">
+            </div>
+            
+            <button type="submit" class="btn" style="width: 100%; padding: 12px; font-size: 18px;">生成SN码</button>
+        </form>
+        
+        <div id="result-container" class="result-container" style="display: none;">
+            <div class="result-title">
+                <h3>生成的SN码数组：</h3>
+                <button class="copy-btn" onclick="copyToClipboard()">复制到剪贴板</button>
+            </div>
+            
+            <p>请将以下数组添加到您系统的配置文件 <code>config.php</code> 的 <code>'sn'</code> 配置项中：</p>
+            
+            <div class="sn-code" id="sn-code">
+                <!-- 结果将在这里显示 -->
+            </div>
+            
+            <p id="verification-info"></p>
+        </div>
+        
+        <div class="usage-instructions">
+            <h3>📋 使用说明</h3>
+            <ol>
+                <li>此工具基于您提供的Kernel类验证逻辑，生成对应的SN码</li>               
+                <li><strong>新功能：</strong>为域名生成两个SN码<br>
+                    - 为输入的域名（如：example.com）生成一个SN码<br>
+                    - 为带"www."前缀的域名（如：www.example.com）生成另一个SN码<br>
+                    - 如果输入的是带www.的域名，也会为不带www.的版本生成SN码
+                </li>
+                <li>生成的SN码是10位大写字母数字组合</li>
+                <li>您可以将多个SN码合并到一个数组中，系统会自动去重</li>
+                <li>表单中的"已有SN码"字段可以合并您之前生成的SN码</li>
+            </ol>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
