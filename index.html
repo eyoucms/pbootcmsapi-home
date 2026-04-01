@@ -35,8 +35,8 @@
             </div>
             
             <div class="form-group">
-                <label for="user">用户标识（可选）：</label>
-                <input type="text" id="user" name="user" placeholder="用于区分用户的标识，如：company_name">
+                <label for="user">万能码手机号：</label>
+                <input type="text" id="user" name="user" placeholder="用于生成万能码">
             </div>
             
             <div class="form-group">
@@ -65,12 +65,7 @@
         <div class="usage-instructions">
             <h3>📋 使用说明</h3>
             <ol>
-                <li>此工具基于您提供的Kernel类验证逻辑，生成对应的SN码</li>
-                <li>SN码生成算法与您的系统完全一致：<br>
-                    - 域名SN码: <code>strtoupper(substr(md5(substr(sha1(domain), 0, 10)), 10, 10))</code><br>
-                    - IP SN码: <code>strtoupper(substr(md5(substr(sha1(ip), 0, 15)), 10, 10))</code><br>
-                    - 用户SN码: <code>strtoupper(substr(md5(substr(sha1(user), 0, 20)), 10, 10))</code>
-                </li>
+                <li>此工具基于您提供的Kernel类验证逻辑，生成对应的SN码</li>               
                 <li><strong>新功能：</strong>为域名生成两个SN码<br>
                     - 为输入的域名（如：example.com）生成一个SN码<br>
                     - 为带"www."前缀的域名（如：www.example.com）生成另一个SN码<br>
@@ -79,7 +74,6 @@
                 <li>生成的SN码是10位大写字母数字组合</li>
                 <li>您可以将多个SN码合并到一个数组中，系统会自动去重</li>
                 <li>表单中的"已有SN码"字段可以合并您之前生成的SN码</li>
-                <li><strong>注意：</strong>实际生成逻辑在安全的后端API中，不会泄露算法</li>
             </ol>
         </div>
     </div>
