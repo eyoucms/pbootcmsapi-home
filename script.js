@@ -118,39 +118,44 @@ function copyToClipboard() {
         return;
     }
     
-    let text = "'sn' => array(\n";
-    window.currentSnCodes.forEach(code => {
-        text += `    '${code}',\n`;
-    });
-    text += "),";
+    const text = window.currentSnCodes.join(',');
     
-    navigator.clipboard.writeText(text)
-        .then(() => {
-            const btn = document.querySelector('.copy-btn');
-            const originalText = btn.textContent;
-            btn.textContent = '已复制！';
-            btn.style.background = '#48bb78';
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = '';
-            }, 2000);
-        })
-        .catch(err => {
-            // 降级方案
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textarea);
-            
-            const btn = document.querySelector('.copy-btn');
-            const originalText = btn.textContent;
-            btn.textContent = '已复制！';
-            btn.style.background = '#48bb78';
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.style.background = '';
-            }, 2000);
-        });
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                showCopySuccess();
+            })
+            .catch(err => {
+                console.error('复制失败:', err);
+                fallbackCopy(text);
+            });
+    } else {
+        fallbackCopy(text);
+    }
+    
+    function showCopySuccess() {
+        const btn = document.querySelector('.copy-btn');
+        const originalText = btn.textContent;
+        btn.textContent = '已复制！';
+        btn.style.background = '#48bb78';
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+        }, 2000);
+    }
+    
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        const success = document.execCommand('copy');
+        document.body.removeChild(textarea);
+        
+        if (success) {
+            showCopySuccess();
+        } else {
+            alert('复制失败，请手动复制');
+        }
+    }
 }
