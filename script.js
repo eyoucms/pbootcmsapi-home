@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 设置当前域名
-    document.getElementById('current-domain').textContent = window.location.hostname;
-    document.getElementById('domain').value = window.location.hostname;
+    const currentDomain = window.location.hostname;
+    document.getElementById('current-domain').textContent = currentDomain;
+    document.getElementById('domain').value = currentDomain;
     
     // 表单提交
     document.getElementById('sn-form').addEventListener('submit', function(e) {
@@ -30,12 +31,29 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('API返回:', data); // 调试用
+            console.log('API返回数据:', data);
             
             if (data.success) {
-                // 从 data.data 中获取实际数据
-                const snCodes = data.data.sn_codes;
-                const verificationInfo = data.data.verification_info;
+                // 兼容不同的数据结构
+                let snCodes = null;
+                let verificationInfo = null;
+                
+                if (data.data && data.data.sn_codes) {
+                    snCodes = data.data.sn_codes;
+                    verificationInfo = data.data.verification_info;
+                } else if (data.sn_codes) {
+                    snCodes = data.sn_codes;
+                    verificationInfo = data.verification_info;
+                } else if (Array.isArray(data.data)) {
+                    snCodes = data.data;
+                } else {
+                    throw new Error('无法解析API返回的数据结构');
+                }
+                
+                // 验证数据
+                if (!Array.isArray(snCodes) || snCodes.length === 0) {
+                    throw new Error('SN码数组为空或格式错误');
+                }
                 
                 // 显示生成的SN码
                 let snCodeHtml = `'sn' => array(<br>`;
@@ -62,6 +80,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         verificationHtml += '</div></li>';
                     }
                     
+                    if (verificationInfo.ip_code) {
+                        verificationHtml += `<li><strong>IP验证码</strong> (${verificationInfo.ip}): ${verificationInfo.ip_code}</li>`;
+                    }
+                    
+                    if (verificationInfo.user_code) {
+                        verificationHtml += `<li><strong>用户验证码</strong> (${verificationInfo.user}): ${verificationInfo.user_code}</li>`;
+                    }
+                    
                     verificationHtml += '</ul>';
                 }
                 
@@ -77,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => {
             console.error('请求错误:', error);
-            snCodeElement.innerHTML = '<div style="color: #e53e3e;">连接API失败，请检查网络或API地址配置</div>';
+            snCodeElement.innerHTML = `<div style="color: #e53e3e;">错误: ${error.message}</div>`;
         });
     });
 });
