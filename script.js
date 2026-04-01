@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 设置当前域名
     const currentDomain = window.location.hostname;
     document.getElementById('current-domain').textContent = currentDomain;
-    document.getElementById('domain').value = currentDomain;
     
     // 表单提交
     document.getElementById('sn-form').addEventListener('submit', function(e) {
