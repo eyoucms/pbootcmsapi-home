@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.input-with-btn {
+    display: flex;
+    gap: 10px;
+}
+
+.input-with-btn input {
+    flex: 1;
+}
+
+.btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #5a67d8;
+}
+
+.btn-secondary {
+    background: #718096;
+}
+
+.btn-secondary:hover {
+    background: #4a5568;
+}
+
+.result-container {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f7fafc;
+    border-radius: 5px;
+    border-left: 4px solid #667eea;
+}
+
+.result-title {
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sn-code {
+    font-family: 'Courier New', monospace;
+    background: #2d3748;
+    color: #68d391;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-size: 18px;
+    word-break: break-all;
+}
+
+.copy-btn {
+    background: #38b2ac;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.copy-btn:hover {
+    background: #319795;
+}
+
+.usage-instructions {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.usage-instructions h3 {
+    color: #f57c00;
+    margin-bottom: 10px;
+}
+
+.usage-instructions ol {
+    margin-left: 20px;
+}
+
+.usage-instructions li {
+    margin-bottom: 8px;
+}
+
+.code-example {
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    margin: 5px 0;
+}
+
+.current-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: #e3f2fd;
+    border-radius: 5px;
+}
+
+.current-info p {
+    margin: 5px 0;
+}
+
+.server-ip {
+    color: #e53935;
+    font-weight: bold;
+}
+
+.domain-variants {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.variant-item {
+    background: #e8f5e9;
+    border: 1px solid #81c784;
+    border-radius: 3px;
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+.variant-key {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
