@@ -22,32 +22,43 @@
                     <input type="text" id="domain" name="domain" placeholder="例如：example.com">
                 </div>
                 <p style="font-size: 12px; color: #666; margin-top: 5px;">提示：将同时为输入的域名和"www."前缀的域名生成SN码</p>
-            </div>            
+            </div>
+            
             <div class="form-group">
                 <label for="server_ip">服务器IP（可选）：</label>
                 <div class="input-with-btn">
                     <input type="text" id="server_ip" name="server_ip" placeholder="例如：192.168.1.1">
                 </div>
-            </div>            
-            <div class="form-group">
-    <label for="existing_sn">已有SN码（可选，用于合并）：</label>
-    <div class="input-with-btn">
-        <input type="text" id="existing_sn" name="existing_sn" placeholder="输入已有SN码，用逗号分隔">
-    </div>
-</div>
+            </div>
+            
+            <div class="form-group"  style="dispaly:none">
+                <label for="user">万能码手机号：</label>
+                <input type="text" id="user" name="user" placeholder="用于生成万能码">
+            </div>
+            
+            <div class="form-group" style="dispaly:none">
+                <label for="existing_sn">已有SN码（可添加多个，用逗号分隔）：</label>
+                <input type="text" id="existing_sn" name="existing_sn" placeholder="已有SN码，会自动合并到结果中">
+            </div>
+            
             <button type="submit" class="btn" style="width: 100%; padding: 12px; font-size: 18px;">生成SN码</button>
-        </form>        
+        </form>
+        
         <div id="result-container" class="result-container" style="display: none;">
             <div class="result-title">
                 <h3>生成的SN码数组：</h3>
                 <button class="copy-btn" onclick="copyToClipboard()">复制到剪贴板</button>
-            </div>            
-            <p>请将以下数组添加到您后台或系统的配置文件 <code>config.php</code> 的 <code>'sn'</code> 配置项中：</p>            
+            </div>
+            
+            <p>请将以下数组添加到您系统的配置文件 <code>config.php</code> 的 <code>'sn'</code> 配置项中：</p>
+            
             <div class="sn-code" id="sn-code">
                 <!-- 结果将在这里显示 -->
-            </div>            
+            </div>
+            
             <p id="verification-info"></p>
-        </div>        
+        </div>
+        
         <div class="usage-instructions">
             <h3>📋 使用说明</h3>
             <ol>
@@ -62,7 +73,8 @@
                 <li>表单中的"已有SN码"字段可以合并您之前生成的SN码</li>
             </ol>
         </div>
-    </div>    
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
