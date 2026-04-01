@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         snCodeElement.innerHTML = '<div class="loading">正在生成SN码...</div>';
         
         // 调用后端API
-        fetch('https://your-api-domain.vercel.app/api/generate-sn', {
+        fetch('https://api.pboot.eu.cc/api/pboot_sn', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
